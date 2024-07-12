@@ -15,7 +15,8 @@ export const authConfig = {
       } else if (isLoggedIn) {
         return Response.redirect(
           new URL(
-            "https://next-jsdashboard-delta.vercel.app/dashboard",
+            // "https://next-jsdashboard-delta.vercel.app/dashboard",
+            "/dashboard",
             nextUrl
           )
         );
