@@ -13,13 +13,7 @@ export const authConfig = {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(
-          new URL(
-            // "https://next-jsdashboard-delta.vercel.app/dashboard",
-            "/dashboard",
-            nextUrl
-          )
-        );
+        return Response.redirect(new URL("/dashboard", nextUrl));
       }
       return true;
     },
