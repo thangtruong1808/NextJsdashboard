@@ -21,7 +21,7 @@ export default async function CustomersTable({
   query: string;
   currentPage: number;
 }) {
-  const customers = await fetchFilteredCustomers(query);
+  const customers = await fetchFilteredCustomers(query, currentPage);
 
   return (
     <div className="w-full">
