@@ -1,4 +1,5 @@
 import { sql } from "@vercel/postgres";
+import axios from "axios";
 import {
   CustomerField,
   CustomersTableType,
@@ -83,7 +84,7 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number
@@ -264,6 +265,14 @@ export async function fetchFilteredCustomers(
       total_pending: formatCurrency(customer.total_pending),
       total_paid: formatCurrency(customer.total_paid),
     }));
+
+    // for (const customer of customers) {
+    //   try {
+    //     await axios.get(customer.image_url);
+    //   } catch (error) {
+    //     customer.image_url = ""; // Mark image URL as invalid
+    //   }
+    // }
 
     return customers;
   } catch (err) {

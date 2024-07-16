@@ -1,3 +1,4 @@
+import "@/app/ui/global.css";
 import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 import Search from "@/app/ui/search";
@@ -5,14 +6,9 @@ import {
   CustomersTableType,
   FormattedCustomersTable,
 } from "@/app/lib/definitions";
-
 import { fetchFilteredCustomers } from "@/app/lib/data";
-
-// export default async function CustomersTable({
-//   customers,
-// }: {
-//   customers: FormattedCustomersTable[];
-// }) {
+import blankuser from "@/public/customers/blank-user.jpg";
+import axios from "axios";
 
 export default async function CustomersTable({
   query,
@@ -22,7 +18,18 @@ export default async function CustomersTable({
   currentPage: number;
 }) {
   const customers = await fetchFilteredCustomers(query, currentPage);
-
+  // for (const customer of customers) {
+  //   if (customer.image_url && !customer.image_url.startsWith("/")) {
+  //     try {
+  //       const response = await axios.get(customer.image_url!);
+  //       if (response.status !== 200) {
+  //         customer.image_url = ""; // Mark image URL as invalid
+  //       }
+  //     } catch (error) {
+  //       customer.image_url = ""; // Mark image URL as invalid
+  //     }
+  //   }
+  // }
   return (
     <div className="w-full">
       {/* <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
@@ -42,14 +49,27 @@ export default async function CustomersTable({
                     <div className="flex items-center justify-between border-b pb-4">
                       <div>
                         <div className="mb-2 flex items-center">
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={customer.image_url}
-                              className="rounded-full"
-                              alt={`${customer.name}'s profile picture`}
-                              width={28}
-                              height={28}
-                            />
+                          <div className="flex items-center gap-3 ">
+                            {customer.image_url !== "" ? (
+                              <Image
+                                src={customer.image_url}
+                                className="rounded-full"
+                                alt={`${customer.name}'s profile picture`}
+                                width={28}
+                                height={28}
+                                objectFit="cover"
+                              />
+                            ) : (
+                              <Image
+                                src={blankuser}
+                                className="rounded-full"
+                                alt={`${customer.name}'s profile picture`}
+                                width={28}
+                                height={28}
+                                objectFit="cover"
+                              />
+                            )}
+
                             <p>{customer.name}</p>
                           </div>
                         </div>
@@ -100,13 +120,26 @@ export default async function CustomersTable({
                     <tr key={customer.id} className="group">
                       <td className="whitespace-nowrap bg-stone-300 py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
                         <div className="flex items-center gap-3">
-                          <Image
-                            src={customer.image_url}
-                            className="rounded-full"
-                            alt={`${customer.name}'s profile picture`}
-                            width={28}
-                            height={28}
-                          />
+                          {customer.image_url !== "" ? (
+                            <Image
+                              src={customer.image_url}
+                              // src={blankuser}
+                              className="rounded-full"
+                              alt={`${customer.name}'s profile picture`}
+                              width={28}
+                              height={28}
+                              objectFit="cover"
+                            />
+                          ) : (
+                            <Image
+                              src={blankuser}
+                              className="rounded-full"
+                              alt={`${customer.name}'s profile picture`}
+                              width={28}
+                              height={28}
+                              objectFit="cover"
+                            />
+                          )}
                           <p>{customer.name}</p>
                         </div>
                       </td>
