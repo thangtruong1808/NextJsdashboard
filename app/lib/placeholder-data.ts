@@ -46,6 +46,12 @@ const customers = [
     email: "balazs@orban.com",
     image_url: "/customers/balazs-orban.png",
   },
+  {
+    id: "23A07334-D29R-6985-C138-A8D2E34E0DBB",
+    name: "Thang Truong",
+    email: "thangtruong1808@gmail.com",
+    image_url: "/customers/thang-truong.png",
+  },
 ];
 
 const invoices = [
